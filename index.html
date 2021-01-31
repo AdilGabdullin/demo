@@ -2,15 +2,63 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>Castle Cuts</title>
+    <title>Order table</title>
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css"
       rel="stylesheet"
+      integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1"
+      crossorigin="anonymous"
     />
   </head>
   <body>
-    <h1>demo</h1>
-    <div id="root" class="container"></div>
-    <script src="main.js"></script>
+    <div class="container">
+      <table class="table">
+        <tbody>
+          <tr>
+            <td>Coolshop</td>
+            <td>16950</td>
+            <td>100</td>
+          </tr>
+          <tr>
+            <td>Elgiganten</td>
+            <td>1799</td>
+            <td>120</td>
+          </tr>
+          <tr>
+            <td>Proshop</td>
+            <td>1834</td>
+            <td>95</td>
+          </tr>
+          <tr>
+            <td>Computer salg</td>
+            <td>2011</td>
+            <td>20</td>
+          </tr>
+          <tr>
+            <td>Skift</td>
+            <td>2284</td>
+            <td>17</td>
+          </tr>
+        </tbody>
+      </table>
+      <button class="btn btn-primary" onclick="orderRows(1);">
+        Order by price
+      </button>
+      <button class="btn btn-primary" onclick="orderRows(2);">
+        Order by visits
+      </button>
+    </div>
+
+    <script>
+      function orderRows(column) {
+        const tbody = document.getElementsByTagName("tbody")[0];
+        const rows = Array.from(tbody.getElementsByTagName("tr"));
+        rows.sort(
+          (r1, r2) =>
+            +r1.children[column].textContent - +r2.children[column].textContent
+        );
+        tbody.innerHTML = rows.map((e) => e.outerHTML).join("");
+      }
+    </script>
   </body>
 </html>
